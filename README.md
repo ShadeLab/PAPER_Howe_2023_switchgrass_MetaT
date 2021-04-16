@@ -8,7 +8,7 @@
 
 
 ### Data
-The raw data for this study are available in the Joint Genomes Institute Genome Portal (https://genome.jgi.doe.gov/portal/ Project ID 503249) with projects designated by year and product type.
+The raw data for this study are available in the Joint Genomes Institute Genome Portal (https://genome.jgi.doe.gov/portal/ Project ID [503249](https://genome.jgi.doe.gov/portal/Seadynanfunction)) with projects designated by year and product type.
 
 
 ### To cite this work or code
