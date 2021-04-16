@@ -25,5 +25,8 @@ This material is based upon work supported by the Great Lakes Bioenergy Research
 This work was supported in part by Michigan State University through computational resources provided by the Institute for Cyber-Enabled Research.
 
 
+
 ### More info
 [ShadeLab](http://ashley17061.wixsite.com/shadelab/home)
+
+[GERMS Lab](http://www.germslab.org/about/)
