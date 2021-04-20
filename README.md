@@ -20,9 +20,7 @@ Plants and microbes form beneficial associations. It is expected that understand
 
 
 ### Funding
-This material is based upon work supported by the Great Lakes Bioenergy Research Center, U.S. Department of Energy, Office of Science, Office of Biological and Environmental Research under Award Numbers DE-SC0018409 and DE-FC02-07ER64494 and by the DOE Center for Advanced Bioenergy and Bioproducts Innovation, U.S. Department of Energy, Office of Science, Office of Biological and Environmental Research under Award Number DE-SC0018420. Any opinions, findings, and conclusions or recommendations expressed in this publication are those of the author(s) and do not necessarily reflect the views of the U.S. Department of Energy.
-
-This work was supported in part by Michigan State University through computational resources provided by the Institute for Cyber-Enabled Research.
+Support for this research was provided by the Great Lakes Bioenergy Research Center, U.S. Department of Energy, Office of Science, Office of Biological and Environmental Research (Awards DE-SC0018409 and DE-FC02-07ER64494), by the National Science Foundation Long-term Ecological Research Program (DEB 1637653 and 1832042) at the Kellogg Biological Station, by Michigan State University AgBioResearch, and by the DOE Center for Advanced Bioenergy and Bioproducts Innovation (US Department of Energy, Office of Science, Office of Biological and Environmental Research under award number DE-SC0018420).  This work was also supported in part by Michigan State University through computational resources provided by the Institute for Cyber-Enabled Research and in part by the University of Wisconsin-Madison Wisconsin Energy Institute as supported by GLBRC Information Services. The work conducted by the U.S. Department of Energy Joint Genome Institute, a DOE Office of Science User Facility, is supported under Contract No. DE-AC02-05CH11231.  AS acknowledges support by the USDA National Institute of Food and Agriculture and Michigan State University AgBioResearch. NS acknowledges support from the Michigan State University Plant Resilience Institute.  
 
 
 
