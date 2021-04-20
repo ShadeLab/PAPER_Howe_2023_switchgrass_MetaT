@@ -1,7 +1,7 @@
 ## Github Repository for
 # Genome-centric analyses of seasonal phyllosphere microbiome activities in perennial crops
 
-## by Adina Howe, Nejc Stopnisek, Shane K. Dooley, Fan M. Yang, Keara L. Grady, and Ashley Shade
+## by Adina C. Howe, Nejc Stopnisek, Shane K. Dooley, Fan M. Yang, Keara L. Grady, and Ashley Shade
 
 
 <i>This work is a preprint.</i>
@@ -12,7 +12,7 @@ The raw data for this study are available in the Joint Genomes Institute Genome 
 
 
 ### To cite this work or code
-XXXX
+Howe AC, N Stopnisek, SK Dooley, FM Yang, KL Grady and A Shade.  2021.  Genome-centric analyses of seasonal phyllosphere microbiome activities in perennial crops.  bioRXiv.
 
 
 ### Abstract
@@ -28,3 +28,7 @@ Support for this research was provided by the Great Lakes Bioenergy Research Cen
 [ShadeLab](http://ashley17061.wixsite.com/shadelab/home)
 
 [GERMS Lab](http://www.germslab.org/about/)
+
+[GLBRC](https://www.glbrc.org/)
+
+[CABBI](https://cabbi.bio/)
