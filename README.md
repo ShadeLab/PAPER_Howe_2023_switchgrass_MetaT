@@ -4,7 +4,7 @@
 ## by Adina Howe, Nejc Stopnisek, Shane K. Dooley, Fan M. Yang, Keara L. Grady, and Ashley Shade
 
 
-<i>This work is not published.</i>
+<i>This work is a preprint.</i>
 
 
 ### Data
