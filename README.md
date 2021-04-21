@@ -12,7 +12,7 @@ The raw data (metagenomes and metatranscriptomes) for this study are available i
 
 
 ### To cite this work or code
-Howe AC, N Stopnisek, SK Dooley, FM Yang, KL Grady and A Shade.  2021.  Genome-centric analyses of seasonal phyllosphere microbiome activities in perennial crops.  bioRXiv.
+Howe AC, N Stopnisek, SK Dooley, FM Yang, KL Grady and A Shade.  2021.  Genome-centric analyses of seasonal phyllosphere microbiome activities in perennial crops.  bioRXiv. doi: https://doi.org/10.1101/2021.04.20.440608
 
 
 ### Abstract
