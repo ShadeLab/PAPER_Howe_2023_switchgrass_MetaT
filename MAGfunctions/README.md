@@ -3,6 +3,9 @@ This folder contains data and analyses to produce a functional summary of 40 MAG
 To produce the combined data for the final figure, run scripts in following order:
 
 1.antismash.R
+
 2.gapseq.R
+
 3.gapseq_manual.R
+
 4.combined_antismash_gapseq.R
