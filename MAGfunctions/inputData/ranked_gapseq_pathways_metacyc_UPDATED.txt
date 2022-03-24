@@ -1,0 +1,140 @@
+Name	nMAGs	group	pathway_summary	fun	desc
+ethene biosynthesis I (plants)	2	biosynthesis	ethene biosynthesis	phytohormone	main pathway for ethylene production (from methionine)
+ethylene glycol degradation	3	specialized functions	ethylene glycol degradation	phytohormone	https://pubmed.ncbi.nlm.nih.gov/19132327/
+putrescine degradation I	16	specialized functions	putrescine degradation	phytohormone	 putrescine is transaminated with 2-oxoglutarate to generate L-glutamate and 4-aminobutanal, which is then oxidized to 4-aminobutanoate, or GABA. GABA can be further degraded into succinate by the superpathway of 4-aminobutanoate degradation pathway.
+putrescine degradation II	2	specialized functions	putrescine degradation	phytohormone	
+putrescine degradation IV	2	specialized functions	putrescine degradation	phytohormone	
+putrescine degradation V	9	specialized functions	putrescine degradation	phytohormone	
+methylsalicylate degradation	8	specialized functions	salycilate degradation	phytohormone	
+L-arabinose degradation I	1	monosaccharide metabolism	arabinose	plant	
+fructose degradation	3	monosaccharide metabolism	fructose	plant	
+D-galactarate degradation I	2	monosaccharide metabolism	galactarate	plant	https://www.frontiersin.org/articles/10.3389/fmicb.2018.02093/full
+D-galacturonate degradation I	2	monosaccharide metabolism	galacturonate	plant	https://academic.oup.com/plphys/article/135/3/1221/6112091?login=true
+gallate degradation I	2	monosaccharide metabolism	gallate	plant	Plant lignin and tannins are major sources of these compounds, which are degraded by soil microorganisms as part of the terrestrial carbon cycle.
+glucose and glucose-1-phosphate degradation	1	monosaccharide metabolism	glucose	plant	
+glucose degradation (oxidative)	4	monosaccharide metabolism	glucose	plant	
+D-mannose degradation I	1	monosaccharide metabolism	mannose	plant	
+D-mannose degradation II	4	monosaccharide metabolism	mannose	plant	https://www.frontiersin.org/articles/10.3389/fenrg.2018.00052/full
+N-acetylglucosamine degradation I	3	monosaccharide metabolism	N-acetylglucosamine	plant	
+xylitol degradation	3	monosaccharide metabolism	xylitol	plant	
+trehalose degradation II (cytosolic)	16	oligo-polysaccharide metabolism	trehalose	plant	https://biotechnologyforbiofuels.biomedcentral.com/articles/10.1186/s13068-015-0342-8
+trehalose degradation IV	3	oligo-polysaccharide metabolism	trehalose	plant	
+trehalose degradation V	3	oligo-polysaccharide metabolism	trehalose	plant	
+trehalose degradation VI (periplasmic)	25	oligo-polysaccharide metabolism	trehalose	plant	
+4-coumarate degradation (anaerobic)	7	specialized functions	cumarate degradation	plant	https://www.pnas.org/content/116/25/12558
+curcumin degradation	17	specialized functions	curcumin degradation	plant	
+glycerol degradation I	3	specialized functions	glycerol degradation	plant	https://apsjournals.apsnet.org/doi/10.1094/PBIOMES-09-19-0055-FI
+glycerol degradation V	1	specialized functions	glycerol degradation	plant	
+glycerophosphodiester degradation	3	specialized functions	glycerol degradation	plant	
+triacylglycerol degradation	1	specialized functions	glycerol degradation	plant	
+protocatechuate degradation I (meta-cleavage pathway)	1	specialized functions	lignine degradation	plant	
+vanillin and vanillate degradation I	6	specialized functions	lignine degradation	plant	
+vanillin and vanillate degradation II	8	specialized functions	lignine degradation	plant	
+"oleate &beta;-oxidation"	19	specialized functions	oleate degradation	plant	
+glycine betaine biosynthesis I (Gram-negative bacteria)	15	biosynthesis	betaine biosynthesis	stress	
+glycine betaine biosynthesis II (Gram-positive bacteria)	30	biosynthesis	betaine biosynthesis	stress	
+(R)- and (S)-3-hydroxybutanoate biosynthesis (engineered)	16	biosynthesis	PHA biosynthesis	stress	
+glutathione biosynthesis	9	biosynthesis	thiols biosynthesis	stress	ROS
+arginine dependent acid resistance	8	specialized functions	acid resistance	stress	
+atrazine degradation I (aerobic)	8	specialized functions	atrazine degradation	stress	herbicide 
+choline degradation I	15	specialized functions	choline degradation	stress	
+choline degradation II	13	specialized functions	choline degradation	stress	
+cyanide degradation	21	specialized functions	cyanide detoxification	stress	https://link.springer.com/article/10.1007/BF02706632
+superoxide radicals degradation	23	specialized functions	ROS degradation	stress	
+L-alanine biosynthesis I	9	amino acid biosynthesis	alanine biosynthesis		
+L-alanine biosynthesis II	18	amino acid biosynthesis	alanine biosynthesis		
+L-alanine biosynthesis III	29	amino acid biosynthesis	alanine biosynthesis		
+L-arginine biosynthesis II (acetyl cycle)	17	amino acid biosynthesis	arginine biosynthesis		
+L-asparagine biosynthesis I	16	amino acid biosynthesis	asparagine biosynthesis		
+L-asparagine biosynthesis II	2	amino acid biosynthesis	asparagine biosynthesis		
+L-aspartate biosynthesis	37	amino acid biosynthesis	aspartate biosynthesis		
+L-cysteine biosynthesis I	19	amino acid biosynthesis	cysteine biosynthesis		
+L-cysteine biosynthesis III (from L-homocysteine)	4	amino acid biosynthesis	cysteine biosynthesis		
+L-selenocysteine biosynthesis I (bacteria)	4	amino acid biosynthesis	cysteine biosynthesis		
+L-glutamate biosynthesis I	11	amino acid biosynthesis	glutamate biosynthesis		
+L-glutamate biosynthesis II	8	amino acid biosynthesis	glutamate biosynthesis		
+L-glutamate biosynthesis III	14	amino acid biosynthesis	glutamate biosynthesis		
+L-glutamate biosynthesis V	8	amino acid biosynthesis	glutamate biosynthesis		
+L-glutamine biosynthesis I	18	amino acid biosynthesis	glutamine biosynthesis		
+glycine biosynthesis I	20	amino acid biosynthesis	glycine biosynthesis		
+glycine biosynthesis II	13	amino acid biosynthesis	glycine biosynthesis		
+glycine biosynthesis III	32	amino acid biosynthesis	glycine biosynthesis		
+glycine biosynthesis IV	33	amino acid biosynthesis	glycine biosynthesis		
+L-histidine biosynthesis	10	amino acid biosynthesis	histidine biosynthesis		
+L-isoleucine biosynthesis I (from threonine)	11	amino acid biosynthesis	isoleucine biosynthesis		
+L-leucine biosynthesis	22	amino acid biosynthesis	leucine biosynthesis		
+L-lysine biosynthesis I	18	amino acid biosynthesis	lysine biosynthesis		
+L-methionine biosynthesis I	9	amino acid biosynthesis	methionine biosynthesis		
+L-methionine biosynthesis II	18	amino acid biosynthesis	methionine biosynthesis		
+L-phenylalanine biosynthesis I	11	amino acid biosynthesis	phenylalanine biosynthesis		
+L-phenylalanine biosynthesis II	4	amino acid biosynthesis	phenylalanine biosynthesis		
+L-ornithine degradation I (L-proline biosynthesis)	2	amino acid biosynthesis	proline biosynthesis		
+L-proline biosynthesis I (from L-glutamate)	4	amino acid biosynthesis	proline biosynthesis		
+L-proline biosynthesis III (from L-ornithine)	4	amino acid biosynthesis	proline biosynthesis		
+L-threonine biosynthesis	14	amino acid biosynthesis	threonine biosynthesis		
+L-alanine degradation I	12	amino acid degradation	alanine degradation		
+L-alanine degradation II (to D-lactate)	1	amino acid degradation	alanine degradation		
+L-alanine degradation III	18	amino acid degradation	alanine degradation		
+L-alanine degradation IV	11	amino acid degradation	alanine degradation		
+L-arginine degradation I (arginase pathway)	4	amino acid degradation	arginine degradation		
+L-arginine degradation II (AST pathway)	5	amino acid degradation	arginine degradation		
+L-arginine degradation III (arginine decarboxylase/agmatinase pathway)	3	amino acid degradation	arginine degradation		
+L-arginine degradation IV (arginine decarboxylase/agmatine deiminase pathway)	1	amino acid degradation	arginine degradation		
+L-arginine degradation VI (arginase 2 pathway)	1	amino acid degradation	arginine degradation		
+L-arginine degradation VII (arginase 3 pathway)	1	amino acid degradation	arginine degradation		
+L-arginine degradation X (arginine monooxygenase pathway)	3	amino acid degradation	arginine degradation		
+L-asparagine degradation I	11	amino acid degradation	asparagine degradation		
+L-aspartate degradation I	37	amino acid degradation	aspartate degradation		
+L-cysteine degradation II	33	amino acid degradation	cysteine degradation		
+L-glutamate degradation I	17	amino acid degradation	glutamate degradation		
+L-glutamate degradation II	25	amino acid degradation	glutamate degradation		
+L-glutamine degradation I	23	amino acid degradation	glutamine degradation		
+L-glutamine degradation II	10	amino acid degradation	glutamine degradation		
+glycine cleavage	15	amino acid degradation	glycine degradation		
+L-histidine degradation VI	5	amino acid degradation	histidine degradation		
+L-isoleucine degradation I	17	amino acid degradation	isoleucine degradation		
+L-leucine degradation I	26	amino acid degradation	leucine degradation		
+L-lysine degradation IV	4	amino acid degradation	lysine degradation		
+L-lysine degradation V	1	amino acid degradation	lysine degradation		
+L-lysine degradation VI	4	amino acid degradation	lysine degradation		
+L-methionine degradation II	29	amino acid degradation	methionine degradation		
+L-phenylalanine degradation I (aerobic)	8	amino acid degradation	phenylalanine degradation		
+L-phenylalanine degradation II (anaerobic)	3	amino acid degradation	phenylalanine degradation		
+L-proline degradation I	4	amino acid degradation	proline degradation		
+glycolysis I (from glucose 6-phosphate)	5	central pathway	glycolysis Embden-Meyerhof-Parnas		
+glycolysis III (from glucose)	9	central pathway	glycolysis Embden-Meyerhof-Parnas		
+glycolysis IV	1	central pathway	glycolysis Embden-Meyerhof-Parnas		
+Entner-Doudoroff shunt	12	central pathway	glycolysis Entner-Doudoroff		
+glyoxylate cycle	4	central pathway	glyoxylate cycle		
+pentose phosphate pathway (non-oxidative branch) I	13	central pathway	pentose phosphate pathway		
+pentose phosphate pathway (oxidative branch) I	3	central pathway	pentose phosphate pathway		
+pentose phosphate pathway (partial)	12	central pathway	pentose phosphate pathway		
+TCA cycle IV (2-oxoglutarate decarboxylase)	16	central pathway	TCA cycle		
+TCA cycle V (2-oxoglutarate synthase)	1	central pathway	TCA cycle		
+TCA cycle VII (acetate-producers)	4	central pathway	TCA cycle		
+L-galactonate degradation	7	monosaccharide metabolism	galactonate		
+D-glucarate degradation I	1	monosaccharide metabolism	glucarate		
+D-gluconate degradation	6	monosaccharide metabolism	gluconate		
+myo-inositol degradation I	2	monosaccharide metabolism	inositol		
+mannitol degradation I	3	monosaccharide metabolism	mannitol		
+mannitol degradation II	1	monosaccharide metabolism	mannitol		
+glycogen degradation I	10	oligo-polysaccharide metabolism	glycogen		
+glycolate and glyoxylate degradation I	3	oligo-polysaccharide metabolism	glycogen		
+glycolate and glyoxylate degradation II	1	oligo-polysaccharide metabolism	glycogen		
+lactose degradation II	3	oligo-polysaccharide metabolism	lactose		
+lactose degradation III	5	oligo-polysaccharide metabolism	lactose		
+melibiose degradation	9	oligo-polysaccharide metabolism	melibiose		
+D-lactate to cytochrome bo oxidase electron transfer	3	respiration	oxygen reduction		
+glycerol-3-phosphate to cytochrome bo oxidase electron transfer	21	respiration	oxygen reduction		
+NADH to cytochrome bd oxidase electron transfer I	9	respiration	oxygen reduction		
+NADH to cytochrome bd oxidase electron transfer II	3	respiration	oxygen reduction		
+NADH to cytochrome bo oxidase electron transfer I	23	respiration	oxygen reduction		
+NADH to cytochrome bo oxidase electron transfer II	3	respiration	oxygen reduction		
+proline to cytochrome bo oxidase electron transfer	4	respiration	oxygen reduction		
+succinate to cytochrome bd oxidase electron transfer	10	respiration	oxygen reduction		
+succinate to cytochrome bo oxidase electron transfer	24	respiration	oxygen reduction		
+benzoate degradation I (aerobic)	1	specialized functions	benzoate degradation		
+benzoate degradation II (aerobic and anaerobic)	9	specialized functions	benzoate degradation		
+nopaline degradation	5	NA	NA		
+octopine degradation	2	NA	NA		
+methylerythritol phosphate pathway I	15	specialized functions	isoprenoid biosynthesis		
