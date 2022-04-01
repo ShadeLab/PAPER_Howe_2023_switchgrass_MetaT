@@ -144,6 +144,7 @@ ggplot(data = occ_sorted2, aes(x=log(abundance), y = prevalence, shape=inclusion
   scale_shape_manual(values = c(19, 43))+scale_color_gradientn(colours = rev(rainbow(5)))+ xlab('Log Abundance (average median bp MAG coverage)') +
   ylab('Occupancy (n=136 metagenomes)')
 ggsave('focalmag.png')
+ggsave('focalmag.eps', dev="eps")
 #136 metagenomes - 2016 switchgrass and miscanthus
 
 ###################################################################################################
@@ -221,6 +222,7 @@ p = ggplot(f2, aes_string(x="month", y="MEAN2", color="cluster", shape="year"))
 p+geom_point(stat="identity", size=3) + theme_bw()+geom_errorbar(limits, width=0)+theme(text=element_text(size=15), axis.text.x = element_text(angle = 90, hjust=1, size=15))+
   xlab('Sampling Month') + ylab('Coverage Normalized by HKGs')+
   theme(panel.grid.major = element_blank(), panel.grid.minor = element_blank())+facet_grid(~plant)
+# Figure 3
 
 ###################################################################################################
 # Characteristics of MAGs in Metatranscriptomes 
@@ -373,7 +375,7 @@ p = ggplot(f2, aes_string(x="month", y="MEAN", shape="year"))
 p+geom_point(stat="identity", size=3) + theme_bw()+geom_errorbar(limits, width=0)+theme(text=element_text(size=12), axis.text.x = element_text(angle = 0, hjust=1, size=15))+
   xlab('KEGG Metabolism Classification') + ylab('Coverage Normalized by HKGs')+scale_shape_manual(values=c(16,2))+
   theme(panel.grid.major = element_blank(), panel.grid.minor = element_blank())+facet_wrap(~V7, ncol = 7, labeller = labeller(V7 = label_wrap_gen(10)), scales="free_y")
-                                                                                    
+#Figure 5                                                                              
 
 
 library("ggpubr")
@@ -472,10 +474,10 @@ library(gplots)
 library(Heatplus)
 library(pvclust)
 library(RColorBrewer)
-phy #from line 57
-phy2 = prune_taxa(taxa_sums(phy) > 0, phy)
-phy3 = prune_samples(sample_sums(phy2) > 0, phy2)
-phy4 = filter_taxa(phy3, function(x) sum(x > 0.000142) > (0.1*length(x)), TRUE)
+#phy #from line 57
+#phy2 = prune_taxa(taxa_sums(phy) > 0, phy)
+#phy3 = prune_samples(sample_sums(phy2) > 0, phy2)
+#phy4 = filter_taxa(phy3, function(x) sum(x > 0.000142) > (0.1*length(x)), TRUE)
 #ps = psmelt(phy4)
 #save(ps, file="melted_phy4.RData")
 load(file="melted_phy4.RData") #loads object ps
@@ -502,6 +504,7 @@ clsig <- unlist(pvpick(result, alpha=0.95, pv="au", type="geq", max.only=TRUE)$c
 ###################################################################################################
 
 #MetaT
+# Figure 4
 load(file="melted_phy4b.RData") #loads object ps2
 
 f <- ddply(ps2, .(bin, Sample), summarise, SUM=sum(Abundance))
@@ -586,7 +589,8 @@ summary(melt(f3_log)$value)
 colors <- c(0, .0027, 0.04588, 0.264, 4)
 my_palette <- brewer.pal(4,"Blues")
 matrix_foo = t(ordered_f3_log2)[nrow(t(ordered_f3_log2)):1,]
-heatmap.2(as.matrix(matrix_foo), col=brewer.pal(9,"Blues"), trace='none', Colv=FALSE, Rowv= FALSE, cexRow =1, distfun = function(x) dist(x,method = 'euclidean'), labCol = meta_sg[order(meta_sg$month, meta_sg$year),]$month)
+heatmap.2(as.matrix(matrix_foo), col=brewer.pal(9,"Blues"), trace='none', Colv=FALSE, Rowv= as.dendrogram(result$hclust), cexRow =1, distfun = function(x) dist(x,method = 'euclidean'), labCol = meta_sg[order(meta_sg$month, meta_sg$year),]$month)
+
 
 sg <- subset(all, plant == "switchgrass" & year == "2017")
 f <- ddply(sg, .(bin, Sample), summarise, SUM=sum(Abundance))
@@ -606,7 +610,7 @@ summary(melt(f3_log)$value)
 colors <- c(0, .0027, 0.04588, 0.264, 4)
 my_palette <- brewer.pal(4,"Blues")
 matrix_foo = t(ordered_f3_log2)[nrow(t(ordered_f3_log2)):1,]
-heatmap.2(as.matrix(matrix_foo), col=brewer.pal(9,"Blues"), trace='none', Colv=FALSE, Rowv= FALSE, cexRow =1, distfun = function(x) dist(x,method = 'euclidean'), labCol = meta_sg[order(meta_sg$month, meta_sg$year),]$month)
+heatmap.2(as.matrix(matrix_foo), col=brewer.pal(9,"Blues"), trace='none', Colv=FALSE, Rowv= as.dendrogram(result$hclust), cexRow =1, distfun = function(x) dist(x,method = 'euclidean'), labCol = meta_sg[order(meta_sg$month, meta_sg$year),]$month)
 
 
 
@@ -628,7 +632,7 @@ summary(melt(f3_log)$value)
 colors <- c(0, .0027, 0.04588, 0.264, 4)
 my_palette <- brewer.pal(4,"Blues")
 matrix_foo = t(ordered_f3_log2)[nrow(t(ordered_f3_log2)):1,]
-heatmap.2(as.matrix(matrix_foo), col=brewer.pal(9,"Blues"), trace='none', Colv=FALSE, Rowv= FALSE, cexRow =1, distfun = function(x) dist(x,method = 'euclidean'), labCol = meta_sg[order(meta_sg$month, meta_sg$year),]$month)
+heatmap.2(as.matrix(matrix_foo), col=brewer.pal(9,"Blues"), trace='none', Colv=FALSE, Rowv= as.dendrogram(result$hclust), cexRow =1, distfun = function(x) dist(x,method = 'euclidean'), labCol = meta_sg[order(meta_sg$month, meta_sg$year),]$month)
 
 
 ###################################################################################################
@@ -792,10 +796,11 @@ temp = subset(f2, month == "9")
 #f2[f2$MEAN != 0,]$zero_flag = "1"
 limits<-aes(ymin=MEAN-SE, ymax=MEAN+SE)
 p = ggplot(f2, aes_string(x="month", y="MEAN", shape="year"))
-p+geom_point(stat="identity") + theme_bw()+geom_errorbar(limits, width=0)+theme_bw()+xlab('Sampling Month') + ylab('Coverage Normalized by HKGs')+
+p2 = p+geom_point(stat="identity") + theme_bw()+geom_errorbar(limits, width=0)+theme_bw()+xlab('Sampling Month') + ylab('Coverage Normalized by HKGs')+
   theme(text = element_text(angle = 0, size=12), panel.grid.major = element_blank(), panel.grid.minor = element_blank())+facet_grid(year~V8, labeller = label_wrap_gen()) + theme(strip.text.x= element_text(angle = 90, size=12))+
-  scale_shape_manual(values=c(16,2))
-ggsave('terpenes.png')
+  scale_shape_manual(values=c(16,2))+ylab('Coverage Normalized by HKGs')
+ggsave('terpenes.png') #Figure 7A 
+ggsave(p2, file="7A.eps", device="eps")
 
 #checking into terpenoid backbone biosyntehsis within terpenes
 ps3c <- subset(ps3b, V8 == "Terpenoid backbone biosynthesis")
@@ -814,7 +819,7 @@ limits<-aes(ymin=MEAN-SE, ymax=MEAN+SE)
 p = ggplot(f2, aes_string(x="month", y="MEAN", shape="year"))
 p+geom_point(stat="identity") + theme_bw()+geom_errorbar(limits, width=0)+theme_bw()+xlab('Sampling Month') + ylab('Coverage Normalized by HKGs')+
   theme(text = element_text(angle = 0, size=12),panel.grid.major = element_blank(), panel.grid.minor = element_blank(), strip.text.x = element_text(angle = 90))+facet_grid(year~V4)+
-  scale_shape_manual(values=c(16,2))
+  scale_shape_manual(values=c(16,2))+ylab('Coverage Normalized by HKGs')
 ggsave('terpenoid_backbone_biosynthesis.png')
 
 # Pulling out the iosprene synthesis genes by ORFs
@@ -831,7 +836,7 @@ temp = subset(f2b, month == "9")
 limits<-aes(ymin=MEAN-SE, ymax=MEAN+SE)
 p = ggplot(f2b, aes_string(x="month", y="MEAN", shape="year"))
 p+geom_point(stat="identity", size=3) + theme_bw()+geom_errorbar(limits, width=0)+theme_bw()+xlab('Sampling Month') + ylab('Coverage Normalized by HKGs')+
-  theme(panel.grid.major = element_blank(), panel.grid.minor = element_blank(), strip.text.x = element_text(angle = 90))+facet_grid(V4~OTU)
+  theme(panel.grid.major = element_blank(), panel.grid.minor = element_blank(), strip.text.x = element_text(angle = 90))+facet_grid(V4~OTU)+ylab('Coverage Normalized by HKGs')
 
 # Pulling out the iosprene synthesis genes by MAGs
 mag_phy = read.csv("../Revision1_29June2021/Datasets/mag_annotations.csv", row.names = 1)
@@ -853,11 +858,10 @@ limits<-aes(ymin=MEAN-SE, ymax=MEAN+SE)
 f3$month <- as.character(f3$month)
 f3$year <- as.character(f3$year)
 p = ggplot(f3, aes_string(x="month", y="MEAN", shape="year"))
-p+geom_point(stat="identity", size=3)+theme_bw()+geom_errorbar(limits, width=0)+theme(text = element_text(size=12), strip.text.x = element_text(angle = 90))+facet_grid(V4~bin)+
-  scale_shape_manual(values=c(16,2))
+p2 = p+geom_point(stat="identity", size=3)+theme_bw()+geom_errorbar(limits, width=0)+theme(text = element_text(size=12), strip.text.x = element_text(angle = 90))+facet_grid(V4~bin)+
+  scale_shape_manual(values=c(16,2))+ylab('Coverage Normalized by HKGs')
 ggsave('isoprene_synthesis_by_mag.png')
-
-
+ggsave(p2, file='7b.eps', device="eps")
 mag_phy = read.csv("../Revision1_29June2021/Datasets/mag_annotations.csv", row.names = 1)
 ps3d <- subset(ps3c, ps3c$V4 %in% c("LytB protein [PF02401.19]", "GcpE protein [PF04551.15]"))
 split1 <- str_split_fixed(ps3d$OTU, "_", 3)[,3]
@@ -930,8 +934,10 @@ f3b$zero_flag = "0"
 f3b[f3b$MEAN > 0,]$zero_flag = "1"
 limits<-aes(ymin=MEAN-SE, ymax=MEAN+SE)
 p = ggplot(f3b, aes_string(x="month", y="MEAN", color="cluster"))
-p+geom_point(stat="identity", size=3, shape=21, aes(fill=zero_flag))+theme_bw()+geom_errorbar(limits, width=0)+facet_grid(cluster~V7)+
-    theme(strip.text.x = element_text(angle = 90)) + scale_fill_manual(values=c("white","black"))
+p2= p+geom_point(stat="identity", size=3, shape=21, aes(fill=zero_flag))+theme_bw()+geom_errorbar(limits, width=0)+facet_grid(cluster~V7)+
+    theme(strip.text.x = element_text(angle = 90)) + scale_fill_manual(values=c("white","black"))+ylab("Coverage Normalized by HKGs")
+ggsave(p2, file="figure_s3.eps", dev = "eps", dpi = 600, width=12, height=6) #Supp Figure S3
+
 
 # Stats on the KEGG Pathways of Difference between Months
 #kruskal-wallis test 
@@ -1130,3 +1136,4 @@ f$bin <- factor(f$bin, levels=order_of_dendrogram_labels)
 p = ggplot(f, aes(x=bin, y=MEAN,  color=Year.State))+geom_point(stat="identity", size=2)+geom_errorbar(limits, width=0)+geom_jitter()
 p = p +theme_bw() + theme(axis.text.x = element_text(angle = 90, hjust=0, vjust=0.5, size=10))+facet_grid(~Plant)
 p + xlab("Phyllosphere MAG") + ylab("Average Abundance (Reads Mapped)")
+# Figure 8
