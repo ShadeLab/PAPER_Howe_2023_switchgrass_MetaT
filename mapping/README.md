@@ -5,3 +5,5 @@ Read recruitment was performed with MAGs that meet either medium- and/or high- q
 Scripts in this folder:
 
 mapping.sh - This is the aggregated scripts to perform the analyses described in the method.  It references specific scripts contained in the folder in mapping-scripts.sh, which helps obtain the specific median bp coverage from the Bowtie2 output files.
+
+This mapping strategy and coverage estimation are used to estimate also housekeeping gene abundances per sample.  Similarly, these are the same model scripts used to identify host and fungal reads that were removed to improve the prokaryotic signal in metagenomes.
