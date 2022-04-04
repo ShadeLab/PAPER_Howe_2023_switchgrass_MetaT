@@ -1,3 +1,4 @@
+# Packages needed for analysis
 library(tidyr)
 library(dplyr)
 library(plyr)
@@ -8,8 +9,9 @@ library(corrplot)
 library(Hmisc)
 library(stringr)
 library(DESeq2)
+
 # Set local workign directory where files are located
-setwd("~/Box Sync/Papers/Phyllosphere-Function/read-counts/")
+setwd("~/Box Sync/Papers/Phyllosphere-Function/phyllosphere-analysis/")
 #Sys.setenv('R_MAX_VSIZE'=6000000000)
 
 # Input Files needed
@@ -38,7 +40,7 @@ setwd("~/Box Sync/Papers/Phyllosphere-Function/read-counts/")
 
 
 ###################################################################################################
-# Contamination of plant host and fungal genomes
+# Contamination of plant host and fungal genomes - Figure S1
 ##############################################################################################
 
 
@@ -100,6 +102,7 @@ p+geom_point(stat="identity", size=3) + theme_bw()+geom_errorbar(limits, width=0
 
 ###################################################################################################
 # Characteristics of MAGs and selection of FOCAL MAGs
+# Figure 3
 ###################################################################################################
 
 meta <- read.delim(sep="\t", file="./sample-meta.txt", header=FALSE, strip.white=TRUE, row.names = 1)
@@ -149,6 +152,7 @@ ggsave('focalmag.eps', dev="eps")
 
 ###################################################################################################
 # Characteristics of MAGs in Metagenomes - Clusters in Metagenomes by Month
+# Figure 4
 ###################################################################################################
 
 cov <- read.delim(file="contigs-unnormalized-median-metag-no-fungal.txt", sep="\t", row.names = 1)
@@ -226,6 +230,7 @@ p+geom_point(stat="identity", size=3) + theme_bw()+geom_errorbar(limits, width=0
 
 ###################################################################################################
 # Characteristics of MAGs in Metatranscriptomes 
+# Figure 4
 ###################################################################################################
 
 cov <- read.delim(file="orfs-unnormalized-median-metat-no-fungal.txt", sep="\t", row.names = 1)
@@ -325,6 +330,7 @@ p+geom_point(stat="identity", size=3) + theme_bw()+geom_errorbar(limits, width=0
 
 ###################################################################################################
 #Functional Analysis of MetaT ORFs against KEGG Subsystems
+# Figure 5
 ###################################################################################################
 
 cov <- read.delim(file="orfs-normalized-median-metat-no-fungal-no-ann-uniquified.txt", sep="\t", row.names = 1)
@@ -468,6 +474,7 @@ orf_cov = merge(orf_list, cov, by.x = V1, by.y = "row.names")
 
 ###################################################################################################
 # Clustering of Focal MAGs (filtered by Abundance of ORFs) - determination of clusters
+# Figure S2
 ###################################################################################################
 
 library(gplots)  
@@ -501,6 +508,7 @@ clsig <- unlist(pvpick(result, alpha=0.95, pv="au", type="geq", max.only=TRUE)$c
 
 ###################################################################################################
 # Enrichment of MAGs by Season - Additional Heatmap figures (incuding clustering)
+# 
 ###################################################################################################
 
 #MetaT
@@ -774,6 +782,8 @@ write.table(foo,  file="core_ORFS2.txt", quote=FALSE, sep="\t")
 
 ###################################################################################################
 # Specific Functions of interest - pyruvate, terpenes, and isoprenes
+# Figure S5
+# Figure 7
 ###################################################################################################
 load("melted_phy4-line224.RData") #as ps
 pyruvate <- scan("../MAG_annotation/refinement/CoA-list.txt", what="", sep="\n") # ORFs with CoA associated in annotations
@@ -898,7 +908,8 @@ p = ggplot(f, aes_string(x="month", y="MEAN", color="year"))
 p+geom_point(stat="identity", size=3)+theme_bw()+geom_errorbar(limits, width=0)
 
 ###################################################################################################
-#Persistence and Enrichment - Annotation based
+#Functional Annotations of Clusters 
+# Figure S3
 ###################################################################################################
 load("melted_phy4-line224.RData") #as ps
 split1 <- str_split_fixed(ps$OTU, "_", 3)[,3]
@@ -938,6 +949,11 @@ p2= p+geom_point(stat="identity", size=3, shape=21, aes(fill=zero_flag))+theme_b
     theme(strip.text.x = element_text(angle = 90)) + scale_fill_manual(values=c("white","black"))+ylab("Coverage Normalized by HKGs")
 ggsave(p2, file="figure_s3.eps", dev = "eps", dpi = 600, width=12, height=6) #Supp Figure S3
 
+
+###################################################################################################
+# Comparison of late and early seasons (ratio analysis)
+# Figure S4
+###################################################################################################
 
 # Stats on the KEGG Pathways of Difference between Months
 #kruskal-wallis test 
@@ -1087,6 +1103,7 @@ write.table(foo2, file="annotations_of_late_only_ORFS.txt", quote=FALSE, sep="\t
 
 ###################################################################################################
 #Other MetaGs
+# Figure 8
 ###################################################################################################
 
 
