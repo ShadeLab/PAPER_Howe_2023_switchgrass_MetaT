@@ -8,7 +8,7 @@
 
 
 ### Data
-The raw data (metagenomes and metatranscriptomes) for this study are available in the Joint Genomes Institute Genome Portal (https://genome.jgi.doe.gov/portal/ Project ID [503249](https://genome.jgi.doe.gov/portal/Seadynanfunction)) with projects designated by year and product type.
+The raw data (metagenomes and metatranscriptomes) for this study are available in the Joint Genomes Institute Genome Portal (https://genome.jgi.doe.gov/portal/ Project ID [503249](https://genome.jgi.doe.gov/portal/Seadynanfunction)) with projects designated by year and product type.  The MAG genomes analyzed in this paper are available on NCBI, as bioproject [PRJNA800073](https://www.ncbi.nlm.nih.gov/bioproject/PRJNA800073)
 
 
 ### To cite this work or code
