@@ -9,3 +9,7 @@ To produce the combined data for the final figure, run scripts in following orde
 3.gapseq_manual.R
 
 4.combined_antismash_gapseq.R
+
+Associated methods in text:
+
+Biosynthetic gene clusters (BGC) were predicted by antiSMASH (v6.0) (ref) and further annotated by Big-SCAPE (v1.1.0) (ref). 
