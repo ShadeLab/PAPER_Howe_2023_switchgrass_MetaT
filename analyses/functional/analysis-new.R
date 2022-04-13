@@ -11,11 +11,11 @@ library(stringr)
 library(DESeq2)
 
 # Set local workign directory where files are located
-setwd("~/Box Sync/Papers/Phyllosphere-Function/phyllosphere-analysis/")
+setwd("~/Downloads/phyllosphere-analysis/")
 #Sys.setenv('R_MAX_VSIZE'=6000000000)
 
 # Input Files needed
-# sample-meta.txt = metadata describing samples
+# sample-meta.https://www.facebook.com/txt = metadata describing samples
 # checkm/checkm_output.txt = output from checkM describing MAGs
 # melted_phy_average_coverage_mags_per_metag.rds = R data object, summary of mapped reads to all potential MAGs
 
@@ -727,7 +727,7 @@ p+geom_point(stat="identity", size=3,  shape=21, aes(fill=zero_flag)) + theme_bw
 # Core analysis - core PFAM annotations
 ###################################################################################################
 
-kegg_map <- read.delim(file = '../MAG_annotation/orf-to-pfam-map.txt', sep='\t', header=FALSE)
+kegg_map <- read.delim(file = '~/Box Sync/Papers/Phyllosphere-Function/MAG_annotation/orf-to-pfam-map.txt', sep='\t', header=FALSE)
 colnames(kegg_map) <- c("OTU", "gene")
 load(file="melted_phy3.RData")
 head(ps) #line 213 loaded object - the melted phyloseq of metaT
@@ -757,7 +757,7 @@ hist(rowSums(f3))
 ggplot(f4, aes(x=SUM)) + geom_histogram()
 targets <- rownames(f4) # List of PFAMs that are considered core > 10
 
-pfam_to_kegg = read.delim(file="../MAG_annotation/pfam-to-kegg.txt", sep='\t', , header=FALSE)
+pfam_to_kegg = read.delim(file="~/Box Sync/Papers/Phyllosphere-Function/MAG_annotation/pfam-to-kegg.txt", sep='\t', , header=FALSE)
 pfam_to_kegg2 <- pfam_to_kegg[pfam_to_kegg$V1 %in% targets,]
 pfam_merge <- merge(pfam_to_kegg2, f4) #ORF annotations that match the targets
 pfam_merge2 <- subset(pfam_merge, pfam_merge$V3 != "NA")
@@ -779,6 +779,51 @@ f2 <- ddply(f, .(month_range, gene), summarise, SUM_MEAN=mean(SUM))
 f2b <- f2 %>% spread(month_range, SUM_MEAN)
 foo <- merge(pfam_merge3, f2b, by.x = "V1", by.y = "gene")
 write.table(foo,  file="core_ORFS2.txt", quote=FALSE, sep="\t")
+
+#####################################################
+#Supp Figure 4 - Core ORF functions 
+#####################################################
+
+mags=read.csv("fmags.csv", header=TRUE)
+library(tidyverse)
+mags=as_tibble(mags)
+
+
+orfs=read.csv("core_ORFS2.csv", header=TRUE)
+orfs=as_tibble(orfs)
+
+#summarize by V3 classification (N=20)
+head(orfs)
+
+CCP<-filter(orfs, V3 == "Cellular community - prokaryotes")
+terp<-filter(orfs, V3 == "Metabolism of terpenoids and polyketides")
+hist(orfs$ratio)
+
+highratios<-filter(orfs, ratio >20)
+
+library(ggplot2)
+
+ggplot(data = terp,aes(x=V1, y=ratio))+
+  geom_bar(stat="identity")+
+  ggtitle("Metabolism of terpenoids and polyketides")+
+  coord_flip()
+
+ggplot(data = orfs)+
+  geom_bar(mapping=aes(x=V1, y=ratio), stat="identity")+
+  #not working:  different color for ratios >20)
+  #geom_segment(aes(x=highratios[,V1],y=ratio))+
+  facet_wrap(~V3, nrow=4)+
+  labs(title="ORF transcripts detected in 39/40 MAGs", y="Late:early normalized transcript ratio", x="ORF")+
+  theme(axis.text.x=element_blank(),
+        axis.ticks.x=element_blank())
+
+
+ggsave("FigureS2_ORFs_TranscriptRatios_v2.eps",
+       plot=last_plot(),
+       device="eps",
+       dpi="print"
+)
+
 
 ###################################################################################################
 # Specific Functions of interest - pyruvate, terpenes, and isoprenes
@@ -1152,5 +1197,7 @@ f[f$MEAN > 0,]$zero_flag = "1"
 f$bin <- factor(f$bin, levels=order_of_dendrogram_labels)
 p = ggplot(f, aes(x=bin, y=MEAN,  color=Year.State))+geom_point(stat="identity", size=2)+geom_errorbar(limits, width=0)+geom_jitter()
 p = p +theme_bw() + theme(axis.text.x = element_text(angle = 90, hjust=0, vjust=0.5, size=10))+facet_grid(~Plant)
-p + xlab("Phyllosphere MAG") + ylab("Average Abundance (Reads Mapped)")
+p2 = p + xlab("Phyllosphere MAG") + ylab("Average Abundance (Reads Mapped)")+scale_y_continuous(limits=c(0, 0.15))
+ggsave(p2, file="figure_8.eps", dev = "eps", dpi = 600, width=12, height=6) #Supp Figure S3
+
 # Figure 8
