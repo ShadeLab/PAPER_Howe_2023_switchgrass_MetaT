@@ -15,7 +15,7 @@ setwd("~/Downloads/phyllosphere-analysis/")
 #Sys.setenv('R_MAX_VSIZE'=6000000000)
 
 # Input Files needed
-# sample-meta.https://www.facebook.com/txt = metadata describing samples
+# sample-meta.txt = metadata describing samples
 # checkm/checkm_output.txt = output from checkM describing MAGs
 # melted_phy_average_coverage_mags_per_metag.rds = R data object, summary of mapped reads to all potential MAGs
 
