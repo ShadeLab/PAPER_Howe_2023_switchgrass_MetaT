@@ -75,3 +75,7 @@ TsaE
 UPF0054
 YajC
 
+Contigs from MAGs that aligned to housekeeping gene:
+https://iastate.app.box.com/file/873215048043
+
+
