@@ -80,9 +80,6 @@ https://iastate.app.box.com/file/873215048043
 
 Coverage based on these contigs was used to estimate HKG abundances for normalization.  
 
-Associated methods in the paper:  "To normalize varying sequencing depths, estimated abundances were normalized by the sum of the median base pair coverage of housekeeping genes identified in each sample.  Housekeeping genes were identified based on full sequence alignment to the HMM models of 71 housekeeping single-copy genes with E-value of less than 1e-5 (Eren et al., 2015; Lee, 2019). If housekeeping genes were not identified in a metagenome or metatranscriptome, samples were removed from further analysis."
-
-
-"
+Associated methods in the paper:  "To normalize varying sequencing depths, estimated abundances were normalized by the sum of the median base pair coverage of housekeeping genes identified IN THE FOCAL MAGs in each sample.  Housekeeping genes were identified based on full sequence alignment to the HMM models of 71 housekeeping single-copy genes with E-value of less than 1e-5 (Eren et al., 2015; Lee, 2019). If housekeeping genes were not identified in a metagenome or metatranscriptome, samples were removed from further analysis."
 
 
