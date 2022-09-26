@@ -70,5 +70,5 @@ tRNA-synt_1d
 tRNA_m1G_MT
 TsaE
 UPF0054
-YajC![image](https://user-images.githubusercontent.com/444212/192332440-707a91da-6368-4a9a-82eb-dce291958c28.png)
+YajC
 
