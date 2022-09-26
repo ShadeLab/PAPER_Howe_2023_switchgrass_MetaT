@@ -1,5 +1,8 @@
 71 Housekeeping Genes Used for Normalization
 
+Reference:  Eren, A.M., Esen, O.C., Quince, C., Vineis, J.H., Morrison, H.G., Sogin, M.L., and Delmont, T.O. (2015) Anvi’o: An advanced analysis and visualization platform for ’omics data. PeerJ 2015: 1–29
+
+
 Adenylsucc_synt
 ADK
 AICARFT_IMPCHas
