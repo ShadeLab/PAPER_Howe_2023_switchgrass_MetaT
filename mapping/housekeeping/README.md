@@ -78,4 +78,6 @@ YajC
 Contigs from MAGs that aligned to housekeeping gene:
 https://iastate.app.box.com/file/873215048043
 
+Coverage based on these contigs was used to estimate HKG abundances for normalization.
+
 
