@@ -1,73 +1,74 @@
 71 Housekeeping Genes Used for Normalization
 
-NAME  Adenylsucc_synt
-NAME  ADK
-NAME  AICARFT_IMPCHas
-NAME  ATP-synt
-NAME  ATP-synt_A
-NAME  Chorismate_synt
-NAME  EF_TS
-NAME  eIF-1a
-NAME  Exonuc_VII_L
-NAME  GrpE
-NAME  Ham1p_like
-NAME  IPPT
-NAME  OSCP
-NAME  Pept_tRNA_hydro
-NAME  PGK
-NAME  RBFA
-NAME  RecO_C
-NAME  Ribonuclease_P
-NAME  Ribosomal_L1
-NAME  Ribosomal_L13
-NAME  Ribosomal_L14
-NAME  Ribosomal_L16
-NAME  Ribosomal_L17
-NAME  Ribosomal_L18p
-NAME  Ribosomal_L19
-NAME  Ribosomal_L20
-NAME  Ribosomal_L21p
-NAME  Ribosomal_L22
-NAME  Ribosomal_L23
-NAME  ribosomal_L24
-NAME  Ribosomal_S3_C
-NAME  Ribosomal_L5
-NAME  Ribosomal_L2
-NAME  Ribosomal_L27
-NAME  Ribosomal_L27A
-NAME  Ribosomal_L28
-NAME  Ribosomal_L29
-NAME  Ribosomal_L3
-NAME  Ribosomal_L32p
-NAME  Ribosomal_L35p
-NAME  Ribosomal_L4
-NAME  Ribosomal_L6
-NAME  Ribosomal_L9_C
-NAME  Ribosomal_S10
-NAME  Ribosomal_S11
-NAME  Ribosomal_S13
-NAME  Ribosomal_S15
-NAME  Ribosomal_S16
-NAME  Ribosomal_S17
-NAME  Ribosomal_S19
-NAME  Ribosomal_S2
-NAME  Ribosomal_S20p
-NAME  Ribosomal_S6
-NAME  Ribosomal_S7
-NAME  Ribosomal_S8
-NAME  Ribosomal_S9
-NAME  Ribosom_S12_S23
-NAME  RNA_pol_L
-NAME  RNA_pol_Rpb6
-NAME  RRF
-NAME  RsfS
-NAME  RuvX
-NAME  SecE
-NAME  SecG
-NAME  SecY
-NAME  SmpB
-NAME  tRNA-synt_1d
-NAME  tRNA_m1G_MT
-NAME  TsaE
-NAME  UPF0054
-NAME  YajC
+Adenylsucc_synt
+ADK
+AICARFT_IMPCHas
+ATP-synt
+ATP-synt_A
+Chorismate_synt
+EF_TS
+eIF-1a
+Exonuc_VII_L
+GrpE
+Ham1p_like
+IPPT
+OSCP
+Pept_tRNA_hydro
+PGK
+RBFA
+RecO_C
+Ribonuclease_P
+Ribosomal_L1
+Ribosomal_L13
+Ribosomal_L14
+Ribosomal_L16
+Ribosomal_L17
+Ribosomal_L18p
+Ribosomal_L19
+Ribosomal_L20
+Ribosomal_L21p
+Ribosomal_L22
+Ribosomal_L23
+ribosomal_L24
+Ribosomal_S3_C
+Ribosomal_L5
+Ribosomal_L2
+Ribosomal_L27
+Ribosomal_L27A
+Ribosomal_L28
+Ribosomal_L29
+Ribosomal_L3
+Ribosomal_L32p
+Ribosomal_L35p
+Ribosomal_L4
+Ribosomal_L6
+Ribosomal_L9_C
+Ribosomal_S10
+Ribosomal_S11
+Ribosomal_S13
+Ribosomal_S15
+Ribosomal_S16
+Ribosomal_S17
+Ribosomal_S19
+Ribosomal_S2
+Ribosomal_S20p
+Ribosomal_S6
+Ribosomal_S7
+Ribosomal_S8
+Ribosomal_S9
+Ribosom_S12_S23
+RNA_pol_L
+RNA_pol_Rpb6
+RRF
+RsfS
+RuvX
+SecE
+SecG
+SecY
+SmpB
+tRNA-synt_1d
+tRNA_m1G_MT
+TsaE
+UPF0054
+YajC![image](https://user-images.githubusercontent.com/444212/192332440-707a91da-6368-4a9a-82eb-dce291958c28.png)
+
