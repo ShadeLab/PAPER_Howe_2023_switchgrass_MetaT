@@ -1,5 +1,5 @@
 
-The scripts here include the quality control filtering.  In brief, JGI quality filtered pairs were filtered with Trimmomatic and plant host and fungal reads were subsequently removed.  
+NGS_Mapping.sh - The scripts here include the quality control filtering.  In brief, JGI quality filtered pairs were filtered with Trimmomatic and plant host and fungal reads were subsequently removed.  
 
 Methods in text:
 
@@ -8,7 +8,7 @@ We proceeded with bioinformatic analysis (Figure 2) of 192 metagenome (Dataset 1
 ----
 
 
-Also here is an example of how the read counts that were mapped to each sample were parsed from Bowtie2 mapping log files.
+data-preparation.ipynb - Also here is an example of how the read counts that were mapped to each sample were parsed from Bowtie2 mapping log files.
 
 Methods in text:
 
