@@ -1,0 +1,3 @@
+Error, fewer reads in file specified with -2 than in file specified with -1
+terminate called after throwing an instance of 'int'
+(ERR): bowtie2-align died with signal 6 (ABRT) 
