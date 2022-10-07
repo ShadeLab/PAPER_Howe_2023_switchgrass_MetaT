@@ -1,4 +1,0 @@
-Bowtie2 log files after mapping for metagenomes and metatranscriptomes to focal MAGS
-
-Flagstat files from sam files for Bowtie2 mappings for metagenomes and metatranscriptomes (ie., samtools flagstat [samfile])
-
