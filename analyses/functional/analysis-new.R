@@ -11,7 +11,7 @@ library(stringr)
 library(DESeq2)
 
 # Set local workign directory where files are located
-setwd("~/Downloads/phyllosphere-analysis/")
+setwd("/Volumes/Groucho/phyllosphere-analysis/")
 #Sys.setenv('R_MAX_VSIZE'=6000000000)
 
 # Input Files needed
@@ -50,8 +50,8 @@ cm_merged = merge(contam_metag, meta, by = "row.names")
 rownames(cm_merged) <- cm_merged$Row.names
 cm_merged$pairs_aligned <- (cm_merged[,5]+cm_merged[,6])/(cm_merged[,3])
 cm_merged$year <- as.factor(cm_merged$year)
-f <- ddply(cm_merged, .(plant, year, month), summarise, MEAN=mean(pairs_aligned), SD=sd(pairs_aligned))
-limits<-aes(ymin=MEAN-SD, ymax=MEAN+SD)
+f <- ddply(cm_merged, .(plant, year, month), summarise, MEAN=mean(pairs_aligned)*100, SD=sd(pairs_aligned)*100)
+limits<-aes(ymin=(MEAN-SD), ymax=(MEAN+SD))
 f$month <- factor(month.name[f$month], levels=month.name[1:12])
 p = ggplot(f, aes_string(x="month", y="MEAN", shape="year"))
 p+geom_point(stat="identity", size=3) + theme_bw()+geom_errorbar(limits, width=0)+theme(text=element_text(size=15), axis.text.x = element_text(angle = 90, hjust=1, size=15))+
@@ -64,7 +64,7 @@ cm_merged = merge(contam_metag, meta, by = "row.names")
 rownames(cm_merged) <- cm_merged$Row.names
 cm_merged$pairs_aligned <- (cm_merged[,5]+cm_merged[,6])/(cm_merged[,3])
 cm_merged$year <- as.factor(cm_merged$year)
-f <- ddply(cm_merged, .(plant, year, month), summarise, MEAN=mean(pairs_aligned), SD=sd(pairs_aligned))
+f <- ddply(cm_merged, .(plant, year, month), summarise, MEAN=mean(pairs_aligned)*100, SD=sd(pairs_aligned)*100)
 f$month <- factor(month.name[f$month], levels=month.name[1:12])
 limits<-aes(ymin=MEAN-SD, ymax=MEAN+SD)
 p = ggplot(f, aes_string(x="month", y="MEAN", shape="year"))
@@ -78,7 +78,7 @@ cm_merged = merge(contam_metag, meta, by = "row.names")
 rownames(cm_merged) <- cm_merged$Row.names
 cm_merged$pairs_aligned <- (cm_merged[,5]+cm_merged[,6])/(cm_merged[,3])
 cm_merged$year <- as.factor(cm_merged$year)
-f <- ddply(cm_merged, .(plant, year, month), summarise, MEAN=mean(pairs_aligned), SD=sd(pairs_aligned))
+f <- ddply(cm_merged, .(plant, year, month), summarise, MEAN=mean(pairs_aligned)*100, SD=sd(pairs_aligned)*100)
 limits<-aes(ymin=MEAN-SD, ymax=MEAN+SD)
 f$month <- factor(month.name[f$month], levels=month.name[1:12])
 p = ggplot(f, aes_string(x="month", y="MEAN", shape="year"))
@@ -92,7 +92,7 @@ cm_merged = merge(contam_metag, meta, by = "row.names")
 rownames(cm_merged) <- cm_merged$Row.names
 cm_merged$pairs_aligned <- (cm_merged[,5]+cm_merged[,6])/(cm_merged[,3])
 cm_merged$year <- as.factor(cm_merged$year)
-f <- ddply(cm_merged, .(plant, year, month), summarise, MEAN=mean(pairs_aligned), SD=sd(pairs_aligned))
+f <- ddply(cm_merged, .(plant, year, month), summarise, MEAN=mean(pairs_aligned)*100, SD=sd(pairs_aligned)*100)
 f$month <- factor(month.name[f$month], levels=month.name[1:12])
 limits<-aes(ymin=MEAN-SD, ymax=MEAN+SD)
 p = ggplot(f, aes_string(x="month", y="MEAN", shape="year"))
@@ -109,7 +109,7 @@ meta <- read.delim(sep="\t", file="./sample-meta.txt", header=FALSE, strip.white
 colnames(meta) <- c("plot", "fert", "date", "id", "plant", "date2", "month")
 meta$year <- format(as.Date(meta$date, format="%d-%b-%Y"), "%Y")
 # CheckM Annotations with Selected Columns and filter by completeness and contamination - see https://github.com/ShadeLab/PAPER_Howe_2021_switchgrass_MetaT/tree/main/mag-evaluation
-checkm <- read.delim(sep='\t', file="./checkm (adina@iastate.edu)/checkm_output.txt", header = TRUE, strip.white=TRUE)
+checkm <- read.delim(sep='\t', file="./checkm/checkm_output.txt", header = TRUE, strip.white=TRUE)
 checkm_qc <- subset(checkm, completeness >= 50 & contamination < 10)
 checkm_qc <- checkm_qc[!checkm_qc$plantbin %in% c("M64"),]
 list_of_interest <- checkm_qc$plantbin
@@ -226,7 +226,6 @@ p = ggplot(f2, aes_string(x="month", y="MEAN2", color="cluster", shape="year"))
 p+geom_point(stat="identity", size=3) + theme_bw()+geom_errorbar(limits, width=0)+theme(text=element_text(size=15), axis.text.x = element_text(angle = 90, hjust=1, size=15))+
   xlab('Sampling Month') + ylab('Coverage Normalized by HKGs')+
   theme(panel.grid.major = element_blank(), panel.grid.minor = element_blank())+facet_grid(~plant)
-# Figure 3
 
 ###################################################################################################
 # Characteristics of MAGs in Metatranscriptomes 
@@ -284,7 +283,7 @@ phy4 = filter_taxa(phy3, function(x) sum(x > 0.000135) > (0.1*length(x)), TRUE)
 ps = psmelt(phy4) #This is the melted filtered phy object used to do analyses
 #save(ps, file="melted_phy3.RData") #no annotations and normalized
 #save(ps, file="phy3_line192.RData") #no annotations and normalized
-annotation = read.delim(file="../MAG_annotation/DRAM2.txt", header=FALSE)
+annotation = read.delim(file="DRAM2.txt", header=FALSE)
 rownames(annotation) = annotation$V1
 annotation$V1 <- NULL
 annotation_phy = tax_table(as.matrix(annotation))
@@ -303,18 +302,45 @@ split1 <- str_split_fixed(ps$OTU, "_", 3)[,3]
 split2a <- str_split_fixed(split1, '_', 2)[,1]
 split2b <- str_split_fixed(split1, '_', 2)[,2]
 split3 <- str_split_fixed(split2b, '_', 2)[,1]
-bin = paste(split2a, split3, sep='_')
+split4 <- str_split_fixed(split3, 'bin.', 2)[,2]
+bin = paste(split2a, split4, sep='')
 ps$bin <- bin
 all <- ps %>% select(Sample, year, OTU, Abundance, bin, month, year)
-f <- ddply(all, .(Sample, year, bin, month), summarise, SUM=sum(Abundance))
-f2 <- ddply(f, .(bin,  month), summarise, MEAN=mean(SUM), SE=sd(SUM)/sqrt(length(SUM)))
+f <- ddply(all, .(Sample, bin, year, month), summarise, SUM=sum(Abundance))
+f_2016 = subset(f, year == "2016")
+f2 <- ddply(f_2016, .(bin, month), summarise, MEAN=mean(SUM), SE=sd(SUM)/sqrt(length(SUM)))
 temp = subset(f2, month == "9")
 f2$month <- as.character(f2$month)
+f2 <- f2 %>% mutate(month2 = if_else(month <= 6, "early", "late"))
+f2$bin <- factor(f2$bin, levels=c("M1", "M8", "M9", "M12",  "M17",  "M21",  "M32",  "M35",  "M44",  "M47",  "M52",  "M55",  "M60",  "M66",  "M67","M77",   "M86",  "M87",  "M94",  "M99",   "M100", "M102", "M105", "M109", "M111", "S8", "S9", "S27",  "S28",  "S29",  "S30",  "S36",  "S50",  "S56",  "S61",  "S71", "S74",   "S80",   "S117", "S120"))
+levels(f2$bin) <- c("M1*", "M8", "M9", "M12",  "M17",  "M21",  "M32",  "M35",  "M44",  "M47",  "M52",  "M55",  "M60",  "M66",  "M67","M77",   "M86",  "M87",  "M94",  "M99",   "M100", "M102*", "M105", "M109*", "M111", "S8", "S9", "S27",  "S28",  "S29*",  "S30*",  "S36",  "S50*",  "S56",  "S61",  "S71*", "S74",   "S80*",   "S117", "S120")
+f2$zero_flag = 0
+f2[f2$MEAN != 0,]$zero_flag = "1"
 limits<-aes(ymin=MEAN-SE, ymax=MEAN+SE)
 p = ggplot(f2, aes_string(x="month", y="MEAN"))
-p+geom_point(stat="identity", size=3) + theme_bw()+geom_errorbar(limits, width=0)+theme(text=element_text(size=15), axis.text.x = element_text(angle = 90, hjust=1, size=15))+
-  xlab('Sampling Month') + ylab('Cumulative Coverage Normalized by HKGs')+
-  theme(panel.grid.major = element_blank(), panel.grid.minor = element_blank())+facet_wrap(.~bin, ncol = 6)
+p2 = p+geom_point(stat="identity", size=3, shape = 21, aes(fill=zero_flag)) + theme_bw()+geom_errorbar(limits, width=0)+theme(text=element_text(size=15), axis.text.x = element_text(angle = 90, hjust=1, size=15))+
+  xlab('Sampling Month') + ylab('Cumulative Coverage Normalized by HKGs')+ scale_fill_manual(values=c("white","black"))+
+  theme(panel.grid.major = element_blank(), panel.grid.minor = element_blank())+facet_wrap(.~bin, ncol = 8)+theme(legend.position = "none")
+ggsave(p2, file = "Supp_Fig3_2016_rev.eps", dev="eps", dpi = 600, width = 12, height = 6)
+f_2017 = subset(f, year == "2017")
+f2 <- ddply(f_2017, .(bin, month), summarise, MEAN=mean(SUM), SE=sd(SUM)/sqrt(length(SUM)))
+temp = subset(f2, month == "9")
+f2$month <- as.character(f2$month)
+f2 <- f2 %>% mutate(month2 = if_else(month <= 6, "early", "late"))
+f2$bin <- factor(f2$bin, levels=c("M1", "M8", "M9", "M12",  "M17",  "M21",  "M32",  "M35",  "M44",  "M47",  "M52",  "M55",  "M60",  "M66",  "M67","M77",   "M86",  "M87",  "M94",  "M99",   "M100", "M102", "M105", "M109", "M111", "S8", "S9", "S27",  "S28",  "S29",  "S30",  "S36",  "S50",  "S56",  "S61",  "S71", "S74",   "S80",   "S117", "S120"))
+levels(f2$bin) <- c("M1*", "M8*", "M9*", "M12*",  "M17*",  "M21*",  "M32*",  "M35*",  "M44*",  "M47*",  "M52*",  "M55*",  "M60*",  "M66*",  "M67*","M77*",   "M86*",  "M87*",  "M94*",  "M99*",   "M100*", "M102*", "M105*", "M109*", "M111*", "S8*", "S9*", "S27*",  "S28*",  "S29*",  "S30*",  "S36*",  "S50*",  "S56*",  "S61*",  "S71*", "S74",   "S80*",   "S117*", "S120*")
+f2$zero_flag = 0
+f2[f2$MEAN != 0,]$zero_flag = "1"
+limits<-aes(ymin=MEAN-SE, ymax=MEAN+SE)
+p = ggplot(f2, aes_string(x="month", y="MEAN"))
+p2 = p+geom_point(stat="identity", size=3, shape = 21, aes(fill=zero_flag)) + theme_bw()+geom_errorbar(limits, width=0)+theme(text=element_text(size=15), axis.text.x = element_text(angle = 90, hjust=1, size=15))+
+  xlab('Sampling Month') + ylab('Cumulative Coverage Normalized by HKGs')+ scale_fill_manual(values=c("white","black"))+
+  theme(panel.grid.major = element_blank(), panel.grid.minor = element_blank())+facet_wrap(.~bin, ncol = 8)+theme(legend.position = "none")
+ggsave(p2, file = "Supp_Fig3_2017_rev.eps", dev="eps", dpi = 600, width = 12, height = 6)
+
+
+
+
 
 f <- ddply(all, .(Sample, year, bin, month), summarise, SUM=sum(Abundance))
 f2 <- ddply(f, .(month, year), summarise, MEAN=mean(SUM), SE=sd(SUM)/sqrt(length(SUM)))
@@ -328,6 +354,24 @@ p+geom_point(stat="identity", size=3) + theme_bw()+geom_errorbar(limits, width=0
   theme(panel.grid.major = element_blank(), panel.grid.minor = element_blank())
 
 
+
+f <- subset(f, year == "2016")
+
+ggplot(f, aes(x=SUM)) + geom_density() #not normal
+f2 <- f %>% mutate(month2 = if_else(month <= 6, "early", "late"))
+#kruskal-wallis test 
+ss <- unique(f2$bin)
+ss_stats <- data.frame(matrix(NA, nrow = length(ss), ncol = 2))
+rownames(ss_stats) <- ss
+for (i in 1:length(ss)){
+  ss_data <- subset(f2, bin == ss[i])
+  res <- kruskal.test(SUM ~ month2, data=ss_data)
+  ss_stats[i,] <- c(res$statistic, res$p.value)
+}
+
+
+
+ss_stats[ss_stats$X2 < 0.05,]
 ###################################################################################################
 #Functional Analysis of MetaT ORFs against KEGG Subsystems
 # Figure 5
@@ -337,7 +381,7 @@ cov <- read.delim(file="orfs-normalized-median-metat-no-fungal-no-ann-uniquified
 abundance <- otu_table(as.matrix(cov), taxa_are_rows=TRUE)
 meta2 <- meta %>% mutate(month_range = ifelse(month < 7, as.character(1), as.character(2)))
 metadata <- sample_data(meta2)
-ann = read.delim(file="../MAG_annotation/DRAM2.txt", header=FALSE)
+ann = read.delim(file="DRAM2.txt", header=FALSE)
 rownames(ann) <- ann$V1
 ann$V1 <- NULL
 ann2 = tax_table(as.matrix(ann))
@@ -385,18 +429,23 @@ p+geom_point(stat="identity", size=3) + theme_bw()+geom_errorbar(limits, width=0
 
 
 library("ggpubr")
-ggplot(f, aes(x=SUM)) + geom_density() #not normal
+f2 <- subset(f, year == "2016")
+ggplot(f2, aes(x=SUM)) + geom_density() #not normal
 #kruskal-wallis test 
-ss <- unique(f$V7[1:22])
+ss <- unique(f2$V7[1:22])
 ss_stats <- data.frame(matrix(NA, nrow = length(ss), ncol = 2))
 rownames(ss_stats) <- ss
 for (i in 1:length(ss)){
-  ss_data <- subset(f, V7 == ss[i])
+  ss_data <- subset(f2, V7 == ss[i])
   res <- kruskal.test(SUM ~ month_range, data=ss_data)
   ss_stats[i,] <- c(res$statistic, res$p.value)
+  #res_dunn <- dunnTest(SUM~month, data=ss_data, method ='bonferroni')
+  print(ss[i])
+  #print(res_dunn)
 }
+#Supp Table S2
 
-#> ss_stats[ss_stats$X2 > 0.01,]
+ss_stats[ss_stats$X2 > 0.05,]
 #X1         X2
 #Cell motility                    0.002730784 0.95832399
 #Cellular community - prokaryotes 2.828408398 0.09261010
@@ -827,7 +876,7 @@ ggsave("FigureS2_ORFs_TranscriptRatios_v2.eps",
 
 ###################################################################################################
 # Specific Functions of interest - pyruvate, terpenes, and isoprenes
-# Figure S5
+# Figure S6
 # Figure 7
 ###################################################################################################
 load("melted_phy4-line224.RData") #as ps
@@ -939,6 +988,46 @@ p = ggplot(f3, aes_string(x="month", y="MEAN", shape="year"))
 p+geom_point(stat="identity", size=3)+theme_bw()+geom_errorbar(limits, width=0)+facet_grid(V4~bin)
 
 ###################################################################################################
+#terpene by MAG
+###################################################################################################
+
+
+load("melted_phy3.RData") #as ps
+terpen_orfs = scan("terpen-orfs.txt", what ="", sep="\n") # ORFs associated with 'terpen' in annotations
+ps_terpen <- subset(ps, OTU %in% terpen_orfs)
+ps <- ps_terpen 
+split1 <- str_split_fixed(ps$OTU, "_", 3)[,3]
+split2a <- str_split_fixed(split1, '_', 2)[,1]
+split2b <- str_split_fixed(split1, '_', 2)[,2]
+split3 <- str_split_fixed(split2b, '_', 2)[,1]
+bin = paste(split2a, split3, sep='_')
+ps$bin <- bin
+
+all <- ps %>% select(Sample, year, OTU, Abundance, day, month, month_range, year, bin)
+f <- ddply(all, .(Sample, year, month, bin), summarise, SUM=sum(Abundance))
+f2 <- ddply(f, .(bin, year, month), summarise, MEAN=mean(SUM), SE=sd(SUM)/sqrt(length(SUM)))
+f2$month <- as.character(f2$month)
+f2$year <- as.character(f2$year)
+#f2 <- subset(f2, V7 != "NA")
+#f2 <- subset(f2, V7 != "Global and overview maps")
+temp = subset(f2, month == "9")
+f2$zero_flag = "0"
+f2[f2$MEAN != 0,]$zero_flag = "1"
+limits<-aes(ymin=MEAN-SE, ymax=MEAN+SE)
+p = ggplot(f2, aes_string(x="month", y="MEAN", shape="year"))
+p+geom_point(stat="identity",  size=3, shape = 21, aes(fill=zero_flag)) + theme_bw()+geom_errorbar(limits, width=0)+theme_bw()+xlab('Sampling Month') + ylab('Coverage Normalized by HKGs')+scale_fill_manual(values=c("white","black"))+
+  theme(text = element_text(angle = 0, size=12), panel.grid.major = element_blank(), panel.grid.minor = element_blank())+facet_grid(year~bin, labeller = label_wrap_gen()) + theme(strip.text.x= element_text(angle = 90, size=12))+
+  ylab('Coverage Normalized by HKGs')
+
+
+
+
+
+
+
+
+
+###################################################################################################
 #Comparison of HKG MetaG and MetaT
 ###################################################################################################
 
@@ -992,7 +1081,7 @@ limits<-aes(ymin=MEAN-SE, ymax=MEAN+SE)
 p = ggplot(f3b, aes_string(x="month", y="MEAN", color="cluster"))
 p2= p+geom_point(stat="identity", size=3, shape=21, aes(fill=zero_flag))+theme_bw()+geom_errorbar(limits, width=0)+facet_grid(cluster~V7)+
     theme(strip.text.x = element_text(angle = 90)) + scale_fill_manual(values=c("white","black"))+ylab("Coverage Normalized by HKGs")
-ggsave(p2, file="figure_s3.eps", dev = "eps", dpi = 600, width=12, height=6) #Supp Figure S3
+ggsave(p2, file="figure_s3.eps", dev = "eps", dpi = 600, width=12, height=6) #Supp Figure S4
 
 
 ###################################################################################################
