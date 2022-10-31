@@ -116,11 +116,14 @@ list_of_interest <- checkm_qc$plantbin
 list_of_interest <- list_of_interest[-25]
 rownames(checkm) <- checkm$plantbin
 
-# Read in Average Estimated Median Read Coverage per MAG (i.e., plantbin)
-#sg <- rownames(subset(meta, plant == "S"))
-cov <- readRDS('melted_phy_average_coverage_mags_per_metag.rds')
-#cov2 <- cov[cov$Sample %in% sg,]
-cov2 <- cov %>% select(Sample, plantbin, MEAN) %>% spread(Sample, MEAN)
+#Abundance Occupancy of 2017 metaGs included
+cov <- read.delim(file="contigs-median-bp-normalized-averaged-by-MAG.txt", sep="\t", row.names = 1) #obtained by get-average-per-MAG.py on contigs-median-bp-normalized.csv
+dim(cov)
+cov$bin <- rownames(cov) 
+foo <- melt(cov)
+colnames(foo) <- c("plantbin", "Sample", "MEAN")
+cov2 <- foo %>% select(Sample, plantbin, MEAN) %>% spread(Sample, MEAN)
+
 #cov2 <- cov2 %>% select(Sample, plantbin, MEAN) %>% spread(Sample, MEAN)
 rownames(cov2) <- cov2$plantbin
 cov2$plantbin <- NULL
@@ -143,12 +146,16 @@ occ_sorted[rownames(occ_sorted) %in% list_of_interest,]$inclusion <- "focal"
 occ_sorted2 <- merge(occ_sorted, checkm, by="row.names")
 # Some checkm contamination > 100, adjusted to 100.
 occ_sorted2[occ_sorted2$contamination > 100,]$contamination = 100
-ggplot(data = occ_sorted2, aes(x=log(abundance), y = prevalence, shape=inclusion, color = contamination, size = completeness)) + geom_point() +
-  scale_shape_manual(values = c(19, 43))+scale_color_gradientn(colours = rev(rainbow(5)))+ xlab('Log Abundance (average median bp MAG coverage)') +
-  ylab('Occupancy (n=136 metagenomes)')
+occ_sorted2 <- subset(occ_sorted2, Row.names != "M22")
+ggplot(data = occ_sorted2, aes(x=log(abundance), y = prevalence, color = contamination, size = completeness)) + geom_point() +
+  scale_shape_manual(values = c(19, 43))+scale_color_gradientn(colours = rev(rainbow(5)))+ xlab('Log abundance (average coverage normalized by HKG)') +
+  ylab('Occupancy (n=192 metagenomes)') + theme_bw()
 ggsave('focalmag.png')
 ggsave('focalmag.eps', dev="eps")
-#136 metagenomes - 2016 switchgrass and miscanthus
+#136 metagenomes - 2016 switchgrass and miscanthus'
+
+
+
 
 ###################################################################################################
 # Characteristics of MAGs in Metagenomes - Clusters in Metagenomes by Month
@@ -156,10 +163,6 @@ ggsave('focalmag.eps', dev="eps")
 ###################################################################################################
 
 cov <- read.delim(file="contigs-unnormalized-median-metag-no-fungal.txt", sep="\t", row.names = 1)
-dim(cov)
-new_col_names = colnames(cov)[2:193]
-cov[,193] <- NULL
-dim(cov) #192 metags
 new_col_names = str_split_fixed(new_col_names, "_L", 2)[,1]
 new_col_names = str_split_fixed(new_col_names, '.sam', 2)[,1]
 colnames(cov) <- new_col_names
