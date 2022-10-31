@@ -129,7 +129,8 @@ rownames(cov2) <- cov2$plantbin
 cov2$plantbin <- NULL
 cov2.abund <- apply(cov2, 1, mean)
 cov2.freq <- rowSums(cov2 != 0)
-occ <- merge(cov2.abund, cov2.freq, by = 0)
+cov2.prev <- cov2.freq/192
+occ <- merge(cov2.abund, cov2.prev, by = 0)
 rownames(occ) <- occ$Row.names
 occ$Row.names <- NULL
 colnames(occ) <- c("abundance", "prevalence")
@@ -145,8 +146,9 @@ occ_sorted[rownames(occ_sorted) %in% list_of_interest,]$inclusion <- "focal"
 #occ_sorted$miscandsg <- occ_sorted$sg + occ_sorted$misc
 occ_sorted2 <- merge(occ_sorted, checkm, by="row.names")
 # Some checkm contamination > 100, adjusted to 100.
-occ_sorted2[occ_sorted2$contamination > 100,]$contamination = 100
+#occ_sorted2[occ_sorted2$contamination > 100,]$contamination = 100
 occ_sorted2 <- subset(occ_sorted2, Row.names != "M22")
+write.table(occ_sorted2, file="abundance_occupancy.txt", quote=FALSE, sep="\t")
 ggplot(data = occ_sorted2, aes(x=log(abundance), y = prevalence, color = contamination, size = completeness)) + geom_point() +
   scale_shape_manual(values = c(19, 43))+scale_color_gradientn(colours = rev(rainbow(5)))+ xlab('Log abundance (average coverage normalized by HKG)') +
   ylab('Occupancy (n=192 metagenomes)') + theme_bw()
