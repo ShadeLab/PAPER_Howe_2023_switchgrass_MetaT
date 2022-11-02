@@ -360,7 +360,7 @@ p+geom_point(stat="identity", size=3) + theme_bw()+geom_errorbar(limits, width=0
 
 
 
-f <- subset(f, year == "2016")
+f <- subset(f, year == "2017")
 
 ggplot(f, aes(x=SUM)) + geom_density() #not normal
 f2 <- f %>% mutate(month2 = if_else(month <= 6, "early", "late"))
@@ -374,9 +374,17 @@ for (i in 1:length(ss)){
   ss_stats[i,] <- c(res$statistic, res$p.value)
 }
 
+ss <- unique(f$bin)
+ss_stats <- data.frame(matrix(NA, nrow = length(ss), ncol = 2))
+rownames(ss_stats) <- ss
+for (i in 1:length(ss)){
+  ss_data <- subset(f, bin == ss[i])
+  res <- kruskal.test(SUM ~ year, data=ss_data)
+  ss_stats[i,] <- c(res$statistic, res$p.value)
+}
 
 
-ss_stats[ss_stats$X2 < 0.05,]
+ss_stats[ss_stats$X2 > 0.05,]
 ###################################################################################################
 #Functional Analysis of MetaT ORFs against KEGG Subsystems
 # Figure 5
@@ -415,6 +423,8 @@ all <- ps %>% select(Sample, year, OTU, Abundance, day, month, month_range, year
 f <- ddply(all, .(Sample, year, month, month_range, V7), summarise, SUM=sum(Abundance))
 fb <- subset(f, V7 != 'NA')
 fb <- subset(f, V7 != 'Global and overview maps')
+#linear model efforts
+#fb is all OTUs summed per sample within V7 KEGG categories
 f2 <- ddply(fb, .(V7,  year, month), summarise, MEAN=mean(SUM), SE=sd(SUM)/sqrt(length(SUM)))
 temp = subset(f2, month == "9" & year == "2017")
 f2$V7 <- factor(f2$V7, levels=temp$V7[order(-temp$MEAN)])
@@ -459,6 +469,42 @@ ss_stats[ss_stats$X2 > 0.05,]
 #Signal transduction              4.213565319 0.04010197
 #Transcription                    1.069450666 0.30106956
 #Translation                      4.630223677 0.03141347
+
+
+
+library("ggpubr")
+fb
+ggplot(fb, aes(x=SUM)) + geom_density() #not normal
+#kruskal-wallis test 
+ss <- unique(fb$V7)
+ss_stats <- data.frame(matrix(NA, nrow = length(ss), ncol = 3))
+rownames(ss_stats) <- ss
+for (i in 1:length(ss)){
+  ss_data <- subset(fb, V7 == ss[i])
+  linearmod <- lm(SUM ~ month, data=ss_data)
+  ss_stats[i,] <- c(summary(linearmod)$r.squared, summary(linearmod)$coefficients[,4][2], coef(linearmod)[2])
+  print(ss[i])
+}
+
+write.table(ss_stats, file="linear_model_kegg.txt", sep="\t", quote=FALSE)
+ss_stats[ss_stats$X2 > 0.05,]
+
+fb2 <- subset(fb, year == "2016")
+ggplot(fb2, aes(x=SUM)) + geom_density() #not normal
+#kruskal-wallis test 
+ss <- unique(fb$V7)
+ss_stats <- data.frame(matrix(NA, nrow = length(ss), ncol = 3))
+rownames(ss_stats) <- ss
+for (i in 1:length(ss)){
+  ss_data <- subset(fb2, V7 == ss[i])
+  linearmod <- lm(SUM ~ month, data=ss_data)
+  ss_stats[i,] <- c(summary(linearmod)$r.squared, summary(linearmod)$coefficients[,4][2], coef(linearmod)[2])
+  print(ss[i])
+}
+
+write.table(ss_stats, file="linear_model_kegg_2016.txt", sep="\t", quote=FALSE)
+ss_stats[ss_stats$X2 > 0.05,]
+
 
 ###########
 
