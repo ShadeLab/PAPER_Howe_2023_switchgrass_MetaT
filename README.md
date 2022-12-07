@@ -12,7 +12,7 @@ The raw data (metagenomes and metatranscriptomes) for this study are available i
 
 
 ### To cite this work or code
-Howe AC, N Stopnisek, SK Dooley, FM Yang, KL Grady and A Shade.  2022. Seasonal activities of the phyllosphere microbiome of perennial crops.  bioRXiv. doi: https://doi.org/10.1101/2021.04.20.440608v2
+Howe AC, N Stopnisek, SK Dooley, FM Yang, KL Grady and A Shade.  2022. Seasonal activities of the phyllosphere microbiome of perennial crops.  bioRXiv. https://www.biorxiv.org/content/10.1101/2021.04.20.440608v2 
 
 
 ### Abstract
