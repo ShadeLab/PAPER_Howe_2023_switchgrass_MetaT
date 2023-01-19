@@ -165,6 +165,9 @@ ggsave('focalmag.eps', dev="eps")
 ###################################################################################################
 
 cov <- read.delim(file="contigs-unnormalized-median-metag-no-fungal.txt", sep="\t", row.names = 1)
+new_col_names <- colnames(cov)[2:193] 
+cov <- cov[1:19882, 1:192]
+colnames(cov) <- new_col_names
 new_col_names = str_split_fixed(new_col_names, "_L", 2)[,1]
 new_col_names = str_split_fixed(new_col_names, '.sam', 2)[,1]
 colnames(cov) <- new_col_names
@@ -195,12 +198,12 @@ hkg_foo$Sample <- NULL
 hkg_norm <- hkg_foo/hkg_foo$SUM
 hkg_norm$SUM <- NULL
 abundance <- otu_table(as.matrix(t(hkg_norm)), taxa_are_rows=TRUE)
-metadata2 = subset(metadata, !(rownames(metadata) %in% zero_samples))
-metadata <- sample_data(metadata2)
+#metadata2 = subset(metadata, !(rownames(metadata) %in% zero_samples))
+#metadata <- sample_data(metadata2)
 phy <- phyloseq(metadata, abundance)  #this is the hkg normalized phyloseq object
 phy_metag <- phy
 #save(phy_metag, file="metag_physeq.RData")
-#foo <- psmelt(phy_metag)
+foo <- psmelt(phy_metag)
 #save(foo, file="metag_physeq_melted.RData")
 
 load('metag_physeq_melted.RData')
@@ -318,14 +321,14 @@ temp = subset(f2, month == "9")
 f2$month <- as.character(f2$month)
 f2 <- f2 %>% mutate(month2 = if_else(month <= 6, "early", "late"))
 f2$bin <- factor(f2$bin, levels=c("M1", "M8", "M9", "M12",  "M17",  "M21",  "M32",  "M35",  "M44",  "M47",  "M52",  "M55",  "M60",  "M66",  "M67","M77",   "M86",  "M87",  "M94",  "M99",   "M100", "M102", "M105", "M109", "M111", "S8", "S9", "S27",  "S28",  "S29",  "S30",  "S36",  "S50",  "S56",  "S61",  "S71", "S74",   "S80",   "S117", "S120"))
-levels(f2$bin) <- c("M1*", "M8", "M9", "M12",  "M17",  "M21",  "M32",  "M35",  "M44",  "M47",  "M52",  "M55",  "M60",  "M66",  "M67","M77",   "M86",  "M87",  "M94",  "M99",   "M100", "M102*", "M105", "M109*", "M111", "S8", "S9", "S27",  "S28",  "S29*",  "S30*",  "S36",  "S50*",  "S56",  "S61",  "S71*", "S74",   "S80*",   "S117", "S120")
+#levels(f2$bin) <- c("M1*", "M8", "M9", "M12",  "M17",  "M21",  "M32",  "M35",  "M44",  "M47",  "M52",  "M55",  "M60",  "M66",  "M67","M77",   "M86",  "M87",  "M94",  "M99",   "M100", "M102*", "M105", "M109*", "M111", "S8", "S9", "S27",  "S28",  "S29*",  "S30*",  "S36",  "S50*",  "S56",  "S61",  "S71*", "S74",   "S80*",   "S117", "S120")
 f2$zero_flag = 0
 f2[f2$MEAN != 0,]$zero_flag = "1"
 limits<-aes(ymin=MEAN-SE, ymax=MEAN+SE)
 p = ggplot(f2, aes_string(x="month", y="MEAN"))
 p2 = p+geom_point(stat="identity", size=3, shape = 21, aes(fill=zero_flag)) + theme_bw()+geom_errorbar(limits, width=0)+theme(text=element_text(size=15), axis.text.x = element_text(angle = 90, hjust=1, size=15))+
   xlab('Sampling Month') + ylab('Cumulative Coverage Normalized by HKGs')+ scale_fill_manual(values=c("white","black"))+
-  theme(panel.grid.major = element_blank(), panel.grid.minor = element_blank())+facet_wrap(.~bin, ncol = 8)+theme(legend.position = "none")
+  theme(panel.grid.major = element_blank(), panel.grid.minor = element_blank())+facet_wrap(.~bin, ncol = 8, scales="free_y")+theme(legend.position = "none")
 ggsave(p2, file = "Supp_Fig3_2016_rev.eps", dev="eps", dpi = 600, width = 12, height = 6)
 f_2017 = subset(f, year == "2017")
 f2 <- ddply(f_2017, .(bin, month), summarise, MEAN=mean(SUM), SE=sd(SUM)/sqrt(length(SUM)))
@@ -340,7 +343,7 @@ limits<-aes(ymin=MEAN-SE, ymax=MEAN+SE)
 p = ggplot(f2, aes_string(x="month", y="MEAN"))
 p2 = p+geom_point(stat="identity", size=3, shape = 21, aes(fill=zero_flag)) + theme_bw()+geom_errorbar(limits, width=0)+theme(text=element_text(size=15), axis.text.x = element_text(angle = 90, hjust=1, size=15))+
   xlab('Sampling Month') + ylab('Cumulative Coverage Normalized by HKGs')+ scale_fill_manual(values=c("white","black"))+
-  theme(panel.grid.major = element_blank(), panel.grid.minor = element_blank())+facet_wrap(.~bin, ncol = 8)+theme(legend.position = "none")
+  theme(panel.grid.major = element_blank(), panel.grid.minor = element_blank())+facet_wrap(.~bin, ncol = 8, scales="free_y")+theme(legend.position = "none")
 ggsave(p2, file = "Supp_Fig3_2017_rev.eps", dev="eps", dpi = 600, width = 12, height = 6)
 
 
@@ -440,6 +443,7 @@ p = ggplot(f2, aes_string(x="month", y="MEAN", shape="year"))
 p+geom_point(stat="identity", size=3) + theme_bw()+geom_errorbar(limits, width=0)+theme(text=element_text(size=12), axis.text.x = element_text(angle = 0, hjust=1, size=15))+
   xlab('KEGG Metabolism Classification') + ylab('Coverage Normalized by HKGs')+scale_shape_manual(values=c(16,2))+
   theme(panel.grid.major = element_blank(), panel.grid.minor = element_blank())+facet_wrap(~V7, ncol = 7, labeller = labeller(V7 = label_wrap_gen(10)), scales="free_y")
+ggsave('fig5.eps')
 #Figure 5                                                                              
 
 
@@ -793,7 +797,7 @@ p+geom_point(stat="identity", size=3) + theme_bw()+geom_errorbar(limits, width=0
 
 f <- ddply(ps3, .(Sample, cluster, V5, year, month), summarise, SUM=sum(Abundance))
 f2 <- ddply(f, .(cluster, V5, year, month), summarise, MEAN=mean(SUM), SE=sd(SUM)/sqrt(length(SUM)))
-f2$V5 <- factor(f2$V5, levels=temp$V5[order(-temp$MEAN)][1:20])
+#f2$V5 <- factor(f2$V5, levels=temp$V5[order(-temp$MEAN)][1:20])
 f2 <- subset(f2, V5 != "NA")
 f2$month <- as.character(f2$month)
 f2 <- subset(f2, V5 != "NA")
@@ -994,7 +998,7 @@ p+geom_point(stat="identity", size=3) + theme_bw()+geom_errorbar(limits, width=0
   theme(panel.grid.major = element_blank(), panel.grid.minor = element_blank(), strip.text.x = element_text(angle = 90))+facet_grid(V4~OTU)+ylab('Coverage Normalized by HKGs')
 
 # Pulling out the iosprene synthesis genes by MAGs
-mag_phy = read.csv("../Revision1_29June2021/Datasets/mag_annotations.csv", row.names = 1)
+mag_phy = read.csv("mag_annotations.csv", row.names = 1)
 ps3d <- subset(ps3c, ps3c$V4 %in% c("LytB protein [PF02401.19]", "GcpE protein [PF04551.15]"))
 split1 <- str_split_fixed(ps3d$OTU, "_", 3)[,3]
 split2a <- str_split_fixed(split1, '_', 2)[,1]
@@ -1094,7 +1098,7 @@ p+geom_point(stat="identity", size=3)+theme_bw()+geom_errorbar(limits, width=0)
 
 ###################################################################################################
 #Functional Annotations of Clusters 
-# Figure S3
+# Figure S4
 ###################################################################################################
 load("melted_phy4-line224.RData") #as ps
 split1 <- str_split_fixed(ps$OTU, "_", 3)[,3]
@@ -1132,7 +1136,7 @@ limits<-aes(ymin=MEAN-SE, ymax=MEAN+SE)
 p = ggplot(f3b, aes_string(x="month", y="MEAN", color="cluster"))
 p2= p+geom_point(stat="identity", size=3, shape=21, aes(fill=zero_flag))+theme_bw()+geom_errorbar(limits, width=0)+facet_grid(cluster~V7)+
     theme(strip.text.x = element_text(angle = 90)) + scale_fill_manual(values=c("white","black"))+ylab("Coverage Normalized by HKGs")
-ggsave(p2, file="figure_s3.eps", dev = "eps", dpi = 600, width=12, height=6) #Supp Figure S4
+ggsave(p2, file="figure_s4.eps", dev = "eps", dpi = 600, width=12, height=6) #Supp Figure S4
 
 
 ###################################################################################################
@@ -1143,8 +1147,9 @@ ggsave(p2, file="figure_s3.eps", dev = "eps", dpi = 600, width=12, height=6) #Su
 # Stats on the KEGG Pathways of Difference between Months
 #kruskal-wallis test 
 #save(ps3, file="metat_melted_clusters_physeq.RData")
+load(file="metat_melted_clusters_physeq.RData")
 f <- ps3 %>% select(Sample, OTU, Abundance, year, V7, month, month_range, cluster)
-save(ps3, file="metat_melted_clusters_physeq.RData")
+#save(ps3, file="metat_melted_clusters_physeq.RData")
 f2 <- ddply(f, .(V7, cluster, year, month_range, Sample), summarise, SUM=sum(Abundance))
 
 ss <- unique(f2$V7)
