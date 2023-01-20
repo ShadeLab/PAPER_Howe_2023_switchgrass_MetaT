@@ -1,28 +1,28 @@
 library(tidyverse)
 library(RColorBrewer)
 
-phyllo_16_core=unique(c(tempCore,tempCore_sw17,tempCore_m16))
-saveRDS(phyllo_16_core, '16S.core.taxa.list.RDS')
+#phyllo_16_core=unique(c(tempCore,tempCore_sw17,tempCore_m16))
+#saveRDS(phyllo_16_core, '16S.core.taxa.list.RDS')
 phyllo_16_core=readRDS('16S.core.taxa.list.RDS')
 
-phyllo_core_taxonomy=tax_filtered[rownames(tax_filtered) %in% phyllo_16_core,]
-saveRDS(phyllo_core_taxonomy, '16S.core.taxa.taxonomy.RDS')
+#phyllo_core_taxonomy=tax_filtered[rownames(tax_filtered) %in% phyllo_16_core,]
+#saveRDS(phyllo_core_taxonomy, '16S.core.taxa.taxonomy.RDS')
 phyllo_core_taxonomy=readRDS('16S.core.taxa.taxonomy.RDS')
 
-magTax=as.data.frame(str_split(glbrc_gtdbtk$classification, ";", simplify = T))
-names(magTax)=c('Kingdom', 'Phylum', 'Class', 'Order', 'Family', 'Genus', 'Species')
-rownames(magTax)=glbrc_gtdbtk$user_genome
+#magTax=as.data.frame(str_split(glbrc_gtdbtk$classification, ";", simplify = T))
+#names(magTax)=c('Kingdom', 'Phylum', 'Class', 'Order', 'Family', 'Genus', 'Species')
+#rownames(magTax)=glbrc_gtdbtk$user_genome
 
-magTax=magTax %>%
-  mutate(Kingdom=str_remove(Kingdom, 'd__'),
-         Phylum=str_remove(Phylum, 'p__'),
-         Class=str_remove(Class, 'c__'),
-         Order=str_remove(Order, 'o__'),
-         Family=str_remove(Family, 'f__'),
-         Genus=str_remove(Genus, 'g__'),
-         Species=str_remove(Species, 's__'))
+#magTax=magTax %>%
+#  mutate(Kingdom=str_remove(Kingdom, 'd__'),
+#         Phylum=str_remove(Phylum, 'p__'),
+#         Class=str_remove(Class, 'c__'),
+#         Order=str_remove(Order, 'o__'),
+#         Family=str_remove(Family, 'f__'),
+#         Genus=str_remove(Genus, 'g__'),
+#         Species=str_remove(Species, 's__'))
 
-saveRDS(magTax, 'MAG.gtdbtk.taxonomy.RDS')
+#saveRDS(magTax, 'MAG.gtdbtk.taxonomy.RDS')
 magTax=readRDS('MAG.gtdbtk.taxonomy.RDS')
 
 mag16Score=left_join(magTax, phyllo_core_taxonomy[,c(1,7)])
@@ -31,7 +31,7 @@ length(unique(mag16Score$otu))
 
 summary(magTax$Genus %in% phyllo_core_taxonomy$Genus)
 
-saveRDS(mag16Score, 'mag_16S_core_taxonomy.RDS')
+#saveRDS(mag16Score, 'mag_16S_core_taxonomy.RDS')
 mag16Score=readRDS('mag_16S_core_taxonomy.RDS')
 
 magTax$dataset='metagenomics'
