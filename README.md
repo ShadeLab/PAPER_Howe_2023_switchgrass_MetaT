@@ -1,10 +1,10 @@
 ## Github Repository for
 # Seasonal activities of the phyllosphere microbiome of perennial crops
 
-## by Adina C. Howe, Nejc Stopnisek, Shane K. Dooley, Fan M. Yang, Keara L. Grady, and Ashley Shade
+## by Adina Howe, Nejc Stopnisek, Shane K. Dooley, Fan Yang, Keara L. Grady, and Ashley Shade
 
 
-<i>This work is a preprint.</i>
+<i>This work is published.</i>
 
 
 ### Data
@@ -12,7 +12,7 @@ The raw data (metagenomes and metatranscriptomes) for this study are available i
 
 
 ### To cite this work or code
-Howe AC, N Stopnisek, SK Dooley, FM Yang, KL Grady and A Shade.  2022. Seasonal activities of the phyllosphere microbiome of perennial crops.  bioRXiv. https://www.biorxiv.org/content/10.1101/2021.04.20.440608v2 
+Howe A, N Stopnisek, SK Dooley, F Yang, KL Grady and A Shade.  2023. Seasonal activities of the phyllosphere microbiome of perennial crops. Nature Communications.  
 
 
 ### Abstract
